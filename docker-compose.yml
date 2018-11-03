@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  cqhttp:
+    image: richardchien/cqhttp:4.5
+    ports:
+      - "9005:9000"
+      - "5700:5700"
+    environment:
+      COOLQ_ACCOUNT=123456
+      CQHTTP_POST_URL=http://localhost:8085
+      CQHTTP_SERVE_DATA_FILES=yes
+    volumes:
+      - $(pwd)/coolq:/home/user/coolq
