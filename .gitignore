@@ -20,3 +20,7 @@
 service/interact/
 service/query/
 service/subscibe/
+
+
+*/vendor/*
+coolq/config/*

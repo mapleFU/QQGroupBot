@@ -2,13 +2,36 @@ version: '3'
 
 services:
   cqhttp:
-    image: richardchien/cqhttp:4.5
+    image: richardchien/cqhttp:latest
+#    links:
+#      - httpserver
     ports:
       - "9005:9000"
       - "5700:5700"
+      - "5911:5911"
     environment:
-      COOLQ_ACCOUNT=123456
-      CQHTTP_POST_URL=http://localhost:8085
-      CQHTTP_SERVE_DATA_FILES=yes
+      - COOLQ_ACCOUNT=3187545268
+      - CQHTTP_POST_URL=http://httpserver:8085
+      - CQHTTP_SERVE_DATA_FILES=yes
+      - CQHTTP_USE_WS=yes
+      - CQHTTP_USE_HTTP=yes
     volumes:
-      - $(pwd)/coolq:/home/user/coolq
+#    you should set your config in this dir
+      - ~/coolq:/home/user/coolq
+#      debug with host mode
+#    network_mode: "host"
+    extra_hosts:
+      - "httpserver:101.132.121.41"
+  httpserver:
+    links:
+      - cqhttp
+#    environment:
+#      - GIN_MODE=release
+    build: ./qqbot
+    ports:
+      - "8085:8085"
+    depends_on:
+      - cqhttp
+
+
+
