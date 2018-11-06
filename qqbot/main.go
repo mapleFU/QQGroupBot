@@ -1,9 +1,13 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
 	"fmt"
 	"encoding/json"
+
+	"github.com/gin-gonic/gin"
+
+	"github.com/mapleFU/QQBot/qqbot/data/group"
+	"net/http"
 )
 
 const HttpRecvPort = 8085
@@ -13,7 +17,16 @@ func main()  {
 	r := gin.Default()
 
 	r.POST("", func(context *gin.Context) {
-		fmt.Println(json.MarshalIndent(context.Request.Body, "", "    "))
+		var chatData group.ChatRequestData
+		if err := context.ShouldBindJSON(&chatData); err != nil {
+			fmt.Println("Error, bad request")
+			fmt.Println(err.Error())
+			fmt.Println(json.MarshalIndent(context.Request.Body, "", "\t"))
+			context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+
 	})
 
 	r.Run(fmt.Sprintf(":%d", HttpRecvPort))

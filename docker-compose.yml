@@ -20,8 +20,8 @@ services:
       - ~/coolq:/home/user/coolq
 #      debug with host mode
 #    network_mode: "host"
-    extra_hosts:
-      - "httpserver:101.132.121.41"
+#    extra_hosts:
+#      - "httpserver:101.132.121.41"
   httpserver:
     links:
       - cqhttp
