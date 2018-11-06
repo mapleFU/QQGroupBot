@@ -6,5 +6,4 @@ type ChatResponseData struct {
 	Reply message.Message `json:"reply"`
 	AutoEscape bool `json:"auto_escape"`
 	AtSender bool `json:"at_sender"`
-
 }

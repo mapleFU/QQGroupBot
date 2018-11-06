@@ -7,6 +7,9 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/mapleFU/QQBot/qqbot/data/group"
+
+	"github.com/mapleFU/QQBot/qqbot/service"
+	"github.com/mapleFU/QQBot/qqbot/service/subscribe"
 )
 
 const HttpRecvPort = 8085
@@ -28,6 +31,12 @@ func checkAtData(chatData *group.ChatRequestData, robotQQ string) bool {
 
 func main() {
 	r := gin.Default()
+	manager := service.NewManager("http://cqhttp:5700")
+	weiboService := subscribe.NewWeiboService("https://rsshub.app/weibo/user/5628238455")
+
+	manager.AddService(weiboService, "weibo")
+
+	manager.AddManagedGroups("117440534")
 
 	r.POST("", func(context *gin.Context) {
 		var chatData group.ChatRequestData
@@ -41,8 +50,9 @@ func main() {
 		if !checkAtData(&chatData, robotQQ) {
 			return
 		}
-		fmt.Println("ok, our robot is at")
+		fmt.Println("ok, our robot is at, let's call our manager")
 	//	来定义我们的服务了
+		manager.RecvRequest(&chatData)
 	})
 
 	r.Run(fmt.Sprintf(":%d", HttpRecvPort))
