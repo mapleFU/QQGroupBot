@@ -19,7 +19,8 @@ func (manager *manager) AddManagedGroups(groupId string)  {
 }
 func (manager *manager) AddService(servicer Servicer, name string)  {
 	manager.serviceMap[name] = servicer
-
+	servicer.SetOutchan(&manager.strReceiver)
+	go servicer.Run()
 }
 
 func (manager *manager) RemoveService(name string) {
@@ -39,6 +40,8 @@ func NewManager(Addr string) *manager {
 		serviceMap:make(map[string]Servicer),
 		requester:*Requester.NewRequester(Addr),
 		receiver:make(chan group.ChatResponseData, 5),
+		strReceiver: make(chan group.StringRespMessage, 5),
+		managedGroups: make([]string, 0),
 	}
 
 	go func() {

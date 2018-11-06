@@ -37,6 +37,7 @@ func main() {
 	manager.AddService(weiboService, "weibo")
 
 	manager.AddManagedGroups("117440534")
+	manager.AddManagedGroups("702208467")
 
 	r.POST("", func(context *gin.Context) {
 		var chatData group.ChatRequestData

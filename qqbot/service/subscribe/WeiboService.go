@@ -5,6 +5,7 @@ import (
 	"time"
 	"github.com/mapleFU/QQBot/qqbot/data/group"
 	"github.com/mapleFU/QQBot/qqbot/service"
+	"fmt"
 )
 
 type WeiboService struct {
@@ -21,11 +22,28 @@ func NewWeiboService(weiboUrl string) *WeiboService {
 	}
 }
 
+func buildService(item *gofeed.Item) group.StringRespMessage {
+
+	Resp := group.StringRespMessage{
+		Message:item.Title + " : \n" + item.Description + "\n链接：" + item.Link,
+		GroupID:"",
+		AutoEscape:true,
+	}
+	return Resp
+}
+
 func (self *WeiboService) Run() {
 	fp := gofeed.NewParser()
 	feed, _ := fp.ParseURL(self.ServiceUrl)
 	newest := feed.Items[0]
 
+	if self.OutChan == nil {
+		fmt.Println("Bug. self.Outchan is nil")
+	} else {
+		fmt.Println("Send News")
+		*self.OutChan <- buildService(newest)
+	}
+	fmt.Println("Send News Done")
 	// 考虑任务如何中止
 	for true  {
 		// 10 分钟一次
@@ -36,12 +54,8 @@ func (self *WeiboService) Run() {
 				newest = item
 				break
 			} else {
-				Resp := group.StringRespMessage{
-					Message:item.Title + " : \n" + item.Content,
-					GroupID:"",
-					AutoEscape:true,
-				}
-				*self.OutChan <- &Resp
+				Resp := buildService(item)
+				*self.OutChan <- Resp
 			}
 		}
 	}
