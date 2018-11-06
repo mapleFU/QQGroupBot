@@ -2,6 +2,8 @@ package group
 
 import "github.com/mapleFU/QQBot/qqbot/data/group/message"
 
+//import "github.com/mapleFU/QQBot/qqbot/data/group/message"
+
 type ChatRequestData struct {
 	PostType string `json:"post_type"`
 	MessageType string `json:"message_type"`

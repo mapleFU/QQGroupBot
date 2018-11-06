@@ -15,6 +15,7 @@ services:
       - CQHTTP_SERVE_DATA_FILES=yes
       - CQHTTP_USE_WS=yes
       - CQHTTP_USE_HTTP=yes
+      - CQHTTP_POST_MESSAGE_FORMAT=array
     volumes:
 #    you should set your config in this dir
       - ~/coolq:/home/user/coolq
