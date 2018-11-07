@@ -56,7 +56,7 @@ func buildService(item *gofeed.Item, title string) group.StringRespMessage {
 	// handle description
 
 	Resp := group.StringRespMessage{
-		Message: title + "\n" + item.Title + " : \n" + strip.StripTags(item.Description) + "\n链接：" + item.Link,
+		Message: title + " : \n" + strip.StripTags(item.Description) + "\n链接：" + item.Link,
 		GroupID:"",
 		AutoEscape:true,
 	}
