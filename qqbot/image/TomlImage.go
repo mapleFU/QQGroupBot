@@ -1,10 +1,14 @@
 package image
 
+type image struct {
+	md5 string	`toml:md5`
+	width int64 `toml:width`
+	height int64 `toml:height`
+	size int64	`toml:size`
+	url string	`toml:url`
+	addtime string	`toml:addtime`
+}
+
 type Image struct {
-	md5 string
-	width int64
-	height int64
-	size int64
-	url string
-	addtime string
+	image image `toml:image`
 }

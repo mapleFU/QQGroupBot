@@ -78,7 +78,7 @@ func (self *WeiboService) Run() {
 		fmt.Println("Bug, Newest is nil")
 	} else {
 		fmt.Println("Send News")
-		*self.OutChan <- buildService(newest, title)
+		//*self.OutChan <- buildService(newest, title)
 	}
 	fmt.Println("Send News Done")
 	// 考虑任务如何中止

@@ -3,6 +3,7 @@ package service
 import (
 	"github.com/mapleFU/QQBot/qqbot/data/group"
 	"github.com/mapleFU/QQBot/qqbot/Requester"
+	"fmt"
 )
 
 type Manager struct {
@@ -28,8 +29,9 @@ func (manager *Manager) RemoveService(name string) {
 }
 
 func (manager *Manager) RecvRequest(request *group.ChatRequestData) {
-	for _, v := range manager.serviceMap {
+	for k, v := range manager.serviceMap {
 		if v.IfAcceptMessage(request) {
+			fmt.Println("Call service " + k)
 			v.PutRequest(request)
 		}
 	}

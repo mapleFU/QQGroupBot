@@ -10,6 +10,7 @@ import (
 
 	"github.com/mapleFU/QQBot/qqbot/service"
 	"github.com/mapleFU/QQBot/qqbot/service/subscribe"
+	"github.com/mapleFU/QQBot/qqbot/service/query"
 )
 
 const HttpRecvPort = 8085
@@ -39,10 +40,12 @@ func main() {
 
 	manager := service.NewManager("http://cqhttp:5700")
 	weiboService := subscribe.NewWeiboService("http://101.132.121.41:1200/weibo/user/5628238455")
+	imageSearch := query.NewSauceNaoQuery()
 
 	manager.AddService(weiboService, "weibo")
+	manager.AddService(imageSearch, "image-search")
 
-	manager.AddManagedGroups("117440534")
+	//manager.AddManagedGroups("117440534")
 	manager.AddManagedGroups("702208467")
 
 	r := gin.Default()

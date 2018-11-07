@@ -26,6 +26,7 @@ services:
   httpserver:
     volumes:
       - ~/coolq:/home/user/coolq
+      - ./log:/home/user/log
     links:
       - cqhttp
 #    environment:
