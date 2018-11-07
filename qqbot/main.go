@@ -38,7 +38,7 @@ func runCQHttpServer(manager *service.Manager)  {
 func main() {
 
 	manager := service.NewManager("http://cqhttp:5700")
-	weiboService := subscribe.NewWeiboService("https://rsshub.app/weibo/user/5628238455")
+	weiboService := subscribe.NewWeiboService("http://101.132.121.41:1200/weibo/user/5628238455")
 
 	manager.AddService(weiboService, "weibo")
 
