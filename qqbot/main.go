@@ -14,6 +14,8 @@ import (
 
 const HttpRecvPort = 8085
 const HttpUploadPort = 5700
+const HttpManagerPort = 6324
+
 const robotQQ = "3187545268"
 
 func checkAtData(chatData *group.ChatRequestData, robotQQ string) bool {
@@ -29,8 +31,12 @@ func checkAtData(chatData *group.ChatRequestData, robotQQ string) bool {
 	return ok
 }
 
+func runCQHttpServer(manager *service.Manager)  {
+
+}
+
 func main() {
-	r := gin.Default()
+
 	manager := service.NewManager("http://cqhttp:5700")
 	weiboService := subscribe.NewWeiboService("https://rsshub.app/weibo/user/5628238455")
 
@@ -39,6 +45,7 @@ func main() {
 	manager.AddManagedGroups("117440534")
 	manager.AddManagedGroups("702208467")
 
+	r := gin.Default()
 	r.POST("", func(context *gin.Context) {
 		var chatData group.ChatRequestData
 		//var mydata interface{}
@@ -52,9 +59,28 @@ func main() {
 			return
 		}
 		fmt.Println("ok, our robot is at, let's call our manager")
-	//	来定义我们的服务了
+		//	来定义我们的服务了
 		manager.RecvRequest(&chatData)
 	})
 
+	// 处理 manager
+	r.POST("/manager/group/add/:groupId", func(context *gin.Context) {
+
+	})
+
+	r.POST("/manager/group/delete/:groupId", func(context *gin.Context) {
+
+	})
+
+	r.POST("/manager/service/start/:serviceName", func(context *gin.Context) {
+		
+	})
+	
+	r.POST("/manager/service/stop/:serviceName", func(context *gin.Context) {
+		
+	})
+
 	r.Run(fmt.Sprintf(":%d", HttpRecvPort))
+	go runCQHttpServer(manager)
+	
 }

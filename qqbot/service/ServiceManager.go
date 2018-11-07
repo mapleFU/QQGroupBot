@@ -5,7 +5,7 @@ import (
 	"github.com/mapleFU/QQBot/qqbot/Requester"
 )
 
-type manager struct {
+type Manager struct {
 	serviceMap map[string]Servicer
 	requester Requester.Requester
 	receiver chan group.ChatResponseData
@@ -14,20 +14,20 @@ type manager struct {
 	managedGroups []string
 }
 
-func (manager *manager) AddManagedGroups(groupId string)  {
+func (manager *Manager) AddManagedGroups(groupId string)  {
 	manager.managedGroups = append(manager.managedGroups, groupId)
 }
-func (manager *manager) AddService(servicer Servicer, name string)  {
+func (manager *Manager) AddService(servicer Servicer, name string)  {
 	manager.serviceMap[name] = servicer
 	servicer.SetOutchan(&manager.strReceiver)
 	go servicer.Run()
 }
 
-func (manager *manager) RemoveService(name string) {
+func (manager *Manager) RemoveService(name string) {
 	delete(manager.serviceMap, name)
 }
 
-func (manager *manager) RecvRequest(request *group.ChatRequestData) {
+func (manager *Manager) RecvRequest(request *group.ChatRequestData) {
 	for _, v := range manager.serviceMap {
 		if v.IfAcceptMessage(request) {
 			v.PutRequest(request)
@@ -35,8 +35,8 @@ func (manager *manager) RecvRequest(request *group.ChatRequestData) {
 	}
 }
 
-func NewManager(Addr string) *manager {
-	this := &manager{
+func NewManager(Addr string) *Manager {
+	this := &Manager{
 		serviceMap:make(map[string]Servicer),
 		requester:*Requester.NewRequester(Addr),
 		receiver:make(chan group.ChatResponseData, 5),
@@ -50,7 +50,7 @@ func NewManager(Addr string) *manager {
 		}
 	}()
 
-	go func(manager *manager) {
+	go func(manager *Manager) {
 		for data := range this.strReceiver {
 			for _, groupID := range manager.managedGroups {
 				data.GroupID = groupID
