@@ -83,7 +83,6 @@ export default {
       if (this.cur_add_name === "" || this.cur_service == null) {
         return;
       }
-
       this.cur_service = null;
       this.cur_add_name = "";
     }
