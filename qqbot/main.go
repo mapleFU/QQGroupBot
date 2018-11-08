@@ -65,9 +65,7 @@ func main() {
 	manager.AddManagedGroups("702208467")
 
 	r := gin.Default()
-	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:8085", "http://localhost:8081"}
-	r.Use(cors.New(config))
+	r.Use(cors.Default())
 
 	// ping of the robot manager, show the robot is alive
 	r.GET("ping", func(context *gin.Context) {

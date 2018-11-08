@@ -23,5 +23,7 @@ service/subscibe/
 
 
 */vendor/*
-coolq/config/*
+config/*
 log/*
+config/3187545268.json
+coolq/*

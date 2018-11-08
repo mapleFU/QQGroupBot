@@ -19,6 +19,7 @@ services:
     volumes:
 #    you should set your config in this dir
       - ~/coolq:/home/user/coolq
+      = ./config:/home/user/coolq/app/io.github.richardchien.coolqhttpapi/config
 #      debug with host mode
 #    network_mode: "host"
 #    extra_hosts:
@@ -37,5 +38,12 @@ services:
     depends_on:
       - cqhttp
 
+  front-page:
+    build:
+      ./qqbot-frontend
+    depends_on:
+      - httpserver
+    ports:
+      - "8083:80"
 
 
