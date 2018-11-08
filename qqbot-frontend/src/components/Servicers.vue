@@ -5,12 +5,13 @@
                 <!--<v-layout>-->
                 <!--<v-flex xs5>-->
                 <div class="headline">
-                    Service QQ
+                    Currently Available Services
                 </div>
                 <!--</v-flex>-->
                 <!--</v-layout>-->
 
             </v-card-title>
+            <v-divider></v-divider>
 
             <v-list>
                 <v-list-tile

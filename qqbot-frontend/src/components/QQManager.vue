@@ -55,7 +55,7 @@ export default {
       qq_numbers: [
         {
           number: 312392187,
-          status: 0
+          status: 1
         }
       ]
     };

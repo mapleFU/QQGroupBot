@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/gin-gonic/gin"
-
 	"github.com/mapleFU/QQBot/qqbot/data/group"
-
 	"github.com/mapleFU/QQBot/qqbot/service"
 	"github.com/mapleFU/QQBot/qqbot/service/subscribe"
 	"github.com/mapleFU/QQBot/qqbot/service/query"
+
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 )
 
 const HttpRecvPort = 8085
@@ -65,6 +65,9 @@ func main() {
 	manager.AddManagedGroups("702208467")
 
 	r := gin.Default()
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:8085", "http://localhost:8081"}
+	r.Use(cors.New(config))
 
 	// ping of the robot manager, show the robot is alive
 	r.GET("ping", func(context *gin.Context) {
@@ -159,6 +162,7 @@ func main() {
 	// 获得服务的service状态
 	r.GET("/manager/service", func(context *gin.Context) {
 		sMap := manager.GetServiceMap()
+		// retMap : appName --> serviceName
 		retMap := make(map[string]string)
 		for k, v := range *sMap {
 			retMap[k] = revMap[v]

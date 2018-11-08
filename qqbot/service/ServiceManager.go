@@ -41,11 +41,11 @@ func (manager *Manager) AddManagedGroups(groupId string)  {
 }
 
 func (manager *Manager) DeleteManagedGroups(groupId string)  {
-	a := manager.managedGroups
+	//a := manager.managedGroups
 	i := 0
 	var value string
 	find := false
-	for i, value = range a {
+	for i, value = range manager.managedGroups {
 		if value == groupId {
 			find = true
 			break
@@ -54,9 +54,9 @@ func (manager *Manager) DeleteManagedGroups(groupId string)  {
 	if !find {
 		return
 	}
-	copy(a[i:], a[i+1:]) // Shift a[i+1:] left one index.
-	a[len(a)-1] = ""     // Erase last element (write zero value).
-	a = a[:len(a)-1]     // Truncate slice.
+	copy(manager.managedGroups[i:], manager.managedGroups[i+1:]) // Shift a[i+1:] left one index.
+	manager.managedGroups[len(manager.managedGroups)-1] = ""     // Erase last element (write zero value).
+	manager.managedGroups = manager.managedGroups[:len(manager.managedGroups)-1]     // Truncate slice.
 }
 
 func (manager *Manager) AddService(servicer Servicer, name string)  {
