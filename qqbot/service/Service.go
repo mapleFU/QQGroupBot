@@ -14,12 +14,17 @@ type Servicer interface {
 
 //	logic
 	Run()
+	Stop()
 }
 
 type BaseServicer struct {
 	InChan chan *group.ChatRequestData
 	// it might be nil
 	OutChan *chan group.StringRespMessage
+}
+
+func (base *BaseServicer) Stop()  {
+	close(base.InChan)
 }
 
 func (base *BaseServicer) GetChan() (out chan<- *group.ChatRequestData) {

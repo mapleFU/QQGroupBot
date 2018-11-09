@@ -63,6 +63,7 @@ func buildService(item *gofeed.Item, title string) group.StringRespMessage {
 	return Resp
 }
 
+// TODO: make clear how it end.
 func (self *WeiboService) Run() {
 	fp := gofeed.NewParser()
 	feed, err := fp.ParseURL(self.ServiceUrl)
@@ -72,17 +73,17 @@ func (self *WeiboService) Run() {
 	}
 	newest := feed.Items[0]
 	title := feed.Title
-	if self.OutChan == nil {
-		fmt.Println("Bug. self.Outchan is nil")
-	} else if newest == nil {
-		fmt.Println("Bug, Newest is nil")
-	} else {
-		fmt.Println("Send News")
-		//*self.OutChan <- buildService(newest, title)
-	}
-	fmt.Println("Send News Done")
+	//if self.OutChan == nil {
+	//	fmt.Println("Bug. self.Outchan is nil")
+	//} else if newest == nil {
+	//	fmt.Println("Bug, Newest is nil")
+	//} else {
+	//	fmt.Println("Send News")
+	//	//*self.OutChan <- buildService(newest, title)
+	//}
+	//fmt.Println("Send News Done")
 	// 考虑任务如何中止
-	for true  {
+	for range self.InChan {
 		// 10 分钟一次
 		time.Sleep(time.Minute * 10)
 		feed, _ := fp.ParseURL(self.ServiceUrl)

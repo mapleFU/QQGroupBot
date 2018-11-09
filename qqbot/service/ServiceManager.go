@@ -71,8 +71,9 @@ func (manager *Manager) AddService(servicer Servicer, name string)  {
 func (manager *Manager) RemoveService(name string) bool {
 	manager.serviceLock.Lock()
 	defer manager.serviceLock.Unlock()
-	_, ok := manager.serviceMap[name]
+	servicer, ok := manager.serviceMap[name]
 	delete(manager.serviceMap, name)
+	servicer.Stop()
 	return ok
 }
 

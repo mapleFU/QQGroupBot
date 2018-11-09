@@ -18,7 +18,7 @@ services:
       - CQHTTP_POST_MESSAGE_FORMAT=array
     volumes:
 #    you should set your config in this dir
-      - ~/coolq:/home/user/coolq
+      - ./coolq:/home/user/coolq
       = ./config:/home/user/coolq/app/io.github.richardchien.coolqhttpapi/config
 #      debug with host mode
 #    network_mode: "host"
@@ -26,7 +26,7 @@ services:
 #      - "httpserver:101.132.121.41"
   httpserver:
     volumes:
-      - ~/coolq:/home/user/coolq
+      - ./coolq:/home/user/coolq
       - ./log:/home/user/log
     links:
       - cqhttp
