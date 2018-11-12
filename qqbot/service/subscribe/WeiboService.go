@@ -71,17 +71,10 @@ func (self *WeiboService) Run() {
 		panic(err.Error())
 
 	}
-	newest := feed.Items[0]
+	lastNewest := feed.Items[0]
 	title := feed.Title
-	//if self.OutChan == nil {
-	//	fmt.Println("Bug. self.Outchan is nil")
-	//} else if newest == nil {
-	//	fmt.Println("Bug, Newest is nil")
-	//} else {
-	//	fmt.Println("Send News")
-	//	//*self.OutChan <- buildService(newest, title)
-	//}
-	//fmt.Println("Send News Done")
+
+	*self.OutChan <- buildService(lastNewest, title)
 	// 考虑任务如何中止
 	for range self.InChan {
 		// 10 分钟一次
@@ -90,13 +83,17 @@ func (self *WeiboService) Run() {
 		if feed.Items == nil {
 			fmt.Println("Feed.Items is nil!")
 		}
-
+		var curNewest *gofeed.Item
+		curNewest = nil
 		for _, item := range feed.Items {
 			if item == nil {
 				fmt.Println("item is nil here")
 			}
-			if item.Title == newest.Title {
-				newest = item
+			if curNewest == nil {
+				curNewest = item
+			}
+			if item.Title == lastNewest.Title {
+				lastNewest = curNewest
 				break
 			} else {
 				Resp := buildService(item, title)

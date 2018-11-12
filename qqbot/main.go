@@ -58,11 +58,12 @@ func main() {
 
 	//
 	//manager.AddService(weiboService, "weibo")
-	//manager.AddService(imageSearch, "image-search")
+	manager.AddService(imageSearch, "image-search")
 	manager.AddService(hitoService, "hitokoto")
 
-	//manager.AddManagedGroups("117440534")
-	manager.AddManagedGroups("702208467")
+	manager.AddManagedGroups("117440534")
+	//manager.AddManagedGroups("702208467")
+	//manager.AddManagedGroups("878156039")
 
 	r := gin.Default()
 	r.Use(cors.Default())

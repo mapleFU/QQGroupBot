@@ -13,8 +13,7 @@ import (
 	"encoding/json"
 	"bytes"
 	"github.com/mapleFU/QQBot/qqbot/data/tracemoe/search"
-	"io"
-	"os"
+
 	"github.com/polds/imgbase64"
 )
 
@@ -108,24 +107,13 @@ func (snq *SauceNaoQuery) Run() {
 						fmt.Println(err.Error())
 						return
 					}
-					fmt.Println(string(strData))
+					//fmt.Println(string(strData))
 
 					var target search.SearchResult
-					json.NewDecoder(bytes.NewBuffer(strData)).Decode(&target)
+					err = json.NewDecoder(bytes.NewBuffer(strData)).Decode(&target)
 					if err != nil {
 						fmt.Println("search.SearchResult 解码异常")
-						out, err := os.Open("/home/user/log/http-response.log")
-						w, err := ioutil.ReadAll(respSearch.Body)
-						if err != nil {
-							// panic?
-							fmt.Println(err.Error())
-
-							fmt.Println(string(w))
-						}
-						fmt.Println(string(w))
-						defer out.Close()
-						io.Copy(out, respSearch.Body)
-						return
+						fmt.Println(err.Error())
 					}
 
 					//if err = json.NewDecoder(respSearch.Body).Decode(&target); err != nil {
@@ -145,15 +133,15 @@ func (snq *SauceNaoQuery) Run() {
 					//	//fmt.Println(err.Error())
 					//	return
 					//}
-					jsonData, err := json.Marshal(target)
-					if err != nil {
-						fmt.Println("search.SearchResult 解码异常")
-						fmt.Println(err.Error())
-						return
-					}
+					//jsonData, err := json.Marshal(target)
+					//if err != nil {
+					//	fmt.Println("search.SearchResult 解码异常")
+					//	fmt.Println(err.Error())
+					//	return
+					//}
 
 					Resp := group.StringRespMessage{
-						Message: string(jsonData),
+						Message: target.String(),
 						GroupID:"",
 						AutoEscape:true,
 					}
