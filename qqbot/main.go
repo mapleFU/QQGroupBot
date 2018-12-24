@@ -57,7 +57,7 @@ func main() {
 	}
 
 	//
-	//manager.AddService(weiboService, "weibo")
+	manager.AddService(weiboService, "weibo")
 	manager.AddService(imageSearch, "image-search")
 	manager.AddService(hitoService, "hitokoto")
 

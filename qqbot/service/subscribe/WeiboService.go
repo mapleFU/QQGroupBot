@@ -74,7 +74,7 @@ func (self *WeiboService) Run() {
 	lastNewest := feed.Items[0]
 	title := feed.Title
 
-	*self.OutChan <- buildService(lastNewest, title)
+	//*self.OutChan <- buildService(lastNewest, title)
 	// 考虑任务如何中止
 	for range self.InChan {
 		// 10 分钟一次
