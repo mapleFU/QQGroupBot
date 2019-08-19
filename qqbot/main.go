@@ -40,7 +40,7 @@ func main() {
 
 	manager := service.NewManager("http://cqhttp:5700")
 
-	weiboService := subscribe.NewWeiboService("http://101.132.121.41:1200/weibo/user/5628238455")
+	weiboService := subscribe.NewWeiboService("http://rsshub/weibo/user/5628238455")
 	imageSearch := query.NewSauceNaoQuery()
 	hitoService := query.NewHitoService()
 
