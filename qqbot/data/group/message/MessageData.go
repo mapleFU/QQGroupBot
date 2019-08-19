@@ -7,14 +7,14 @@ package message
 
 // 定义的 QQ 消息的数据结构, 表示单条的消息
 type MessageData struct {
-//	field for file
+	//	field for file
 	File string `json:"file,omitempty"`
-	Url string `json:"url,omitempty"`
-//	field for text
+	Url  string `json:"url,omitempty"`
+	//	field for text
 	Text string `json:"text,omitempty"`
-//	field for face
+	//	field for face
 	Id string `json:"id,omitempty"`
-//	field for at
+	//	field for at
 	QQ string `json:"qq"`
 }
 
@@ -25,6 +25,7 @@ type MessageSegment struct {
 }
 
 type Message []MessageSegment
+
 //type Message struct {
 //	Message []MessageSegment `json:"message,omitempty,string"`
 //}

@@ -1,16 +1,17 @@
 package service
 
 import (
-	"github.com/mapleFU/QQBot/qqbot/data/group"
-	"github.com/mapleFU/QQBot/qqbot/Requester"
 	"fmt"
 	"sync"
+
+	"github.com/mapleFU/QQBot/qqbot/Requester"
+	"github.com/mapleFU/QQBot/qqbot/data/group"
 )
 
 type Manager struct {
-	serviceMap map[string]Servicer
-	requester Requester.Requester
-	receiver chan group.ChatResponseData
+	serviceMap  map[string]Servicer
+	requester   Requester.Requester
+	receiver    chan group.ChatResponseData
 	strReceiver chan group.StringRespMessage
 	// 管理的群组
 	managedGroups []string
@@ -35,12 +36,12 @@ func (manager *Manager) copyServiceMap() map[string]Servicer {
 	return nil
 }
 
-func (manager *Manager) AddManagedGroups(groupId string)  {
+func (manager *Manager) AddManagedGroups(groupId string) {
 
 	manager.managedGroups = append(manager.managedGroups, groupId)
 }
 
-func (manager *Manager) DeleteManagedGroups(groupId string)  {
+func (manager *Manager) DeleteManagedGroups(groupId string) {
 	//a := manager.managedGroups
 	i := 0
 	var value string
@@ -54,12 +55,12 @@ func (manager *Manager) DeleteManagedGroups(groupId string)  {
 	if !find {
 		return
 	}
-	copy(manager.managedGroups[i:], manager.managedGroups[i+1:]) // Shift a[i+1:] left one index.
-	manager.managedGroups[len(manager.managedGroups)-1] = ""     // Erase last element (write zero value).
-	manager.managedGroups = manager.managedGroups[:len(manager.managedGroups)-1]     // Truncate slice.
+	copy(manager.managedGroups[i:], manager.managedGroups[i+1:])                 // Shift a[i+1:] left one index.
+	manager.managedGroups[len(manager.managedGroups)-1] = ""                     // Erase last element (write zero value).
+	manager.managedGroups = manager.managedGroups[:len(manager.managedGroups)-1] // Truncate slice.
 }
 
-func (manager *Manager) AddService(servicer Servicer, name string)  {
+func (manager *Manager) AddService(servicer Servicer, name string) {
 	manager.serviceLock.Lock()
 	defer manager.serviceLock.Unlock()
 
@@ -89,14 +90,12 @@ func (manager *Manager) RecvRequest(request *group.ChatRequestData) {
 	}
 }
 
-
-
 func NewManager(Addr string) *Manager {
 	this := &Manager{
-		serviceMap:make(map[string]Servicer),
-		requester:*Requester.NewRequester(Addr),
-		receiver:make(chan group.ChatResponseData, 5),
-		strReceiver: make(chan group.StringRespMessage, 5),
+		serviceMap:    make(map[string]Servicer),
+		requester:     *Requester.NewRequester(Addr),
+		receiver:      make(chan group.ChatResponseData, 5),
+		strReceiver:   make(chan group.StringRespMessage, 5),
 		managedGroups: make([]string, 0),
 	}
 

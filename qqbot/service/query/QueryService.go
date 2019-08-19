@@ -6,9 +6,4 @@ import (
 
 type QueryService struct {
 	service.BaseServicer
-
 }
-
-
-
-

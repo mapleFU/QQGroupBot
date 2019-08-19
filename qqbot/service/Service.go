@@ -9,10 +9,10 @@ type Servicer interface {
 	GetChan() (out chan<- *group.ChatRequestData)
 	IfAcceptMessage(Request *group.ChatRequestData) bool
 	PutRequest(Request *group.ChatRequestData)
-	SetOutchan(respChan* chan group.StringRespMessage)
+	SetOutchan(respChan *chan group.StringRespMessage)
 	SendData(data *group.StringRespMessage)
 
-//	logic
+	//	logic
 	Run()
 	Stop()
 }
@@ -23,7 +23,7 @@ type BaseServicer struct {
 	OutChan *chan group.StringRespMessage
 }
 
-func (base *BaseServicer) Stop()  {
+func (base *BaseServicer) Stop() {
 	close(base.InChan)
 }
 
@@ -37,12 +37,11 @@ func (base *BaseServicer) SendData(data *group.StringRespMessage) {
 	}
 }
 
-
 func (base *BaseServicer) PutRequest(Request *group.ChatRequestData) {
 	base.InChan <- Request
 }
 
-func (base *BaseServicer) SetOutchan(respChan* chan group.StringRespMessage)  {
+func (base *BaseServicer) SetOutchan(respChan *chan group.StringRespMessage) {
 	if respChan == nil {
 		return
 	} else {
@@ -52,8 +51,7 @@ func (base *BaseServicer) SetOutchan(respChan* chan group.StringRespMessage)  {
 
 func NewBaseServicer() BaseServicer {
 	return BaseServicer{
-		InChan:make(chan *group.ChatRequestData),
-		OutChan:nil,
+		InChan:  make(chan *group.ChatRequestData),
+		OutChan: nil,
 	}
 }
-

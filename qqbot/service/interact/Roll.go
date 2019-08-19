@@ -1,20 +1,21 @@
 package interact
 
 import (
-	"github.com/mapleFU/QQBot/qqbot/service"
-	"github.com/mapleFU/QQBot/qqbot/data/group"
-	"sync"
 	"strings"
+	"sync"
+
+	"github.com/mapleFU/QQBot/qqbot/data/group"
 	"github.com/mapleFU/QQBot/qqbot/data/group/message"
+	"github.com/mapleFU/QQBot/qqbot/service"
 )
 
 type RollService struct {
 	service.BaseServicer
-	innerData map[string][]string	// 内部的 roll 数据
+	innerData map[string][]string // 内部的 roll 数据
 	innerLock sync.Mutex
 }
 
-func (self *RollService) checkRollOrInner(segment *message.MessageSegment)  {
+func (self *RollService) checkRollOrInner(segment *message.MessageSegment) {
 
 }
 
@@ -37,8 +38,6 @@ func (self *RollService) IfAcceptMessage(Request *group.ChatRequestData) bool {
 
 func (self *RollService) Run() {
 	for data := range self.InChan {
-		
+
 	}
 }
-
-

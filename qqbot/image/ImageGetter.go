@@ -1,15 +1,16 @@
 package image
 
 import (
-	"github.com/mapleFU/QQBot/qqbot/data/group/message"
+	"bufio"
+	"bytes"
 	"fmt"
+	"github.com/mapleFU/QQBot/qqbot/data/group/message"
 	"io/ioutil"
 	"strings"
-	"bytes"
-	"bufio"
 )
 
-const IMAGE_DIR  = "/home/user/coolq/data/image"
+const IMAGE_DIR = "/home/user/coolq/data/image"
+
 // return the real url for the image
 
 func GetImage(segment *message.MessageSegment) (string, bool) {
@@ -58,6 +59,5 @@ func GetImage(segment *message.MessageSegment) (string, bool) {
 	} else {
 		return url, false
 	}
-
 
 }

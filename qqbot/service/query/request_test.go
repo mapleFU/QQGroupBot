@@ -1,16 +1,16 @@
 package query
 
 import (
-	"testing"
-	"net/http"
-	"fmt"
-	"io/ioutil"
 	"bufio"
 	"bytes"
+	"fmt"
+	"io/ioutil"
+	"net/http"
 	"strings"
+	"testing"
 )
 
-func TestHttpGet(t *testing.T)  {
+func TestHttpGet(t *testing.T) {
 	fileName := "/Users/fuasahi/coolq/data/image/F7EB61A22794FAC40DD057A6B0B14A86.jpg.cqimg"
 	file, err := ioutil.ReadFile(fileName)
 	if err != nil {
@@ -48,7 +48,7 @@ func TestHttpGet(t *testing.T)  {
 		_, err2 := http.Get(url)
 		if err2 != nil {
 			t.Error("re-error" + err2.Error())
-		} else  {
+		} else {
 			t.Error("just one error" + err.Error())
 		}
 	}

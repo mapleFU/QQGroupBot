@@ -7,13 +7,13 @@ type Doc struct {
 	//To float64 `json:"to"`
 	//At float64 `json:"at"`
 	// Number, "OVA/OAD", "Special", ""
-	Episode interface{} `json:"episode"`
-	Season string `json:"season"`
-	Similarity float64 `json:"similarity"`
+	Episode    interface{} `json:"episode"`
+	Season     string      `json:"season"`
+	Similarity float64     `json:"similarity"`
 	//TitleChinese string `json:"title_chinese"`
 	TitleEnglish string `json:"title_english"`
-	FileName string `json:"file_name"`
-	MalID int64 `json:"mal_id"`
+	FileName     string `json:"file_name"`
+	MalID        int64  `json:"mal_id"`
 }
 
 func (doc *Doc) String() string {
@@ -22,7 +22,7 @@ func (doc *Doc) String() string {
 }
 
 type SearchResult struct {
-	Docs []Doc `json:"docs"`
+	Docs  []Doc `json:"docs"`
 	Trial int64 `json:"trial"`
 }
 

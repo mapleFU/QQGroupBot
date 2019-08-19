@@ -1,18 +1,19 @@
 package subscribe
 
 import (
-	"github.com/mmcdole/gofeed"
-	
-	"time"
 	"github.com/mapleFU/QQBot/qqbot/data/group"
 	"github.com/mapleFU/QQBot/qqbot/service"
-	"fmt"
-	"strings"
-	"bytes"
 
+	"bytes"
+	"fmt"
 	"log"
+	"strings"
+	"time"
+
 	"golang.org/x/net/html"
+
 	"github.com/grokify/html-strip-tags-go"
+	"github.com/mmcdole/gofeed"
 )
 
 type WeiboService struct {
@@ -47,8 +48,8 @@ func extractLink(linkText string) string {
 
 func NewWeiboService(weiboUrl string) *WeiboService {
 	return &WeiboService{
-		ServiceUrl:weiboUrl,
-		Subscribe: Subscribe{service.NewBaseServicer()},
+		ServiceUrl: weiboUrl,
+		Subscribe:  Subscribe{service.NewBaseServicer()},
 	}
 }
 
@@ -56,9 +57,9 @@ func buildService(item *gofeed.Item, title string) group.StringRespMessage {
 	// handle description
 
 	Resp := group.StringRespMessage{
-		Message: title + " : \n" + strip.StripTags(item.Description) + "\n链接：" + item.Link,
-		GroupID:"",
-		AutoEscape:true,
+		Message:    title + " : \n" + strip.StripTags(item.Description) + "\n链接：" + item.Link,
+		GroupID:    "",
+		AutoEscape: true,
 	}
 	return Resp
 }

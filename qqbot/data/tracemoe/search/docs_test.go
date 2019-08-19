@@ -1,12 +1,12 @@
 package search
 
 import (
-	"testing"
-	"io/ioutil"
 	"fmt"
+	"io/ioutil"
+	"testing"
 )
 
-func Test_SearchResult(t *testing.T)  {
+func Test_SearchResult(t *testing.T) {
 	fileBytes, err := ioutil.ReadFile("test.json")
 	if err != nil {
 		t.Error(err.Error())

@@ -1,8 +1,9 @@
 package query
 
 import (
-	"github.com/mapleFU/QQBot/qqbot/data/group"
 	"strings"
+
+	"github.com/mapleFU/QQBot/qqbot/data/group"
 )
 
 type MovieSchedule struct {

@@ -2,17 +2,17 @@ package query
 
 import (
 	"github.com/mapleFU/QQBot/qqbot/data/group"
-	"strings"
-	"github.com/mapleFU/QQBot/qqbot/image"
-	"net/http"
-	"io/ioutil"
-	"fmt"
-	//"encoding/base64"
-	"github.com/mapleFU/QQBot/qqbot/service"
-	//"path/filepath"
-	"encoding/json"
-	"bytes"
 	"github.com/mapleFU/QQBot/qqbot/data/tracemoe/search"
+	"github.com/mapleFU/QQBot/qqbot/image"
+	"github.com/mapleFU/QQBot/qqbot/service"
+
+	"fmt"
+	"io/ioutil"
+	"net/http"
+	"strings"
+
+	"bytes"
+	"encoding/json"
 
 	"github.com/polds/imgbase64"
 )
@@ -141,9 +141,9 @@ func (snq *SauceNaoQuery) Run() {
 					//}
 
 					Resp := group.StringRespMessage{
-						Message: target.String(),
-						GroupID:"",
-						AutoEscape:true,
+						Message:    target.String(),
+						GroupID:    "",
+						AutoEscape: true,
 					}
 					fmt.Println("Ready to send")
 					*snq.OutChan <- Resp

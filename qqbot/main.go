@@ -6,8 +6,8 @@ import (
 
 	"github.com/mapleFU/QQBot/qqbot/data/group"
 	"github.com/mapleFU/QQBot/qqbot/service"
-	"github.com/mapleFU/QQBot/qqbot/service/subscribe"
 	"github.com/mapleFU/QQBot/qqbot/service/query"
+	"github.com/mapleFU/QQBot/qqbot/service/subscribe"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -32,7 +32,7 @@ func checkAtData(chatData *group.ChatRequestData, robotQQ string) bool {
 	return ok
 }
 
-func runCQHttpServer(manager *service.Manager)  {
+func runCQHttpServer(manager *service.Manager) {
 
 }
 
@@ -46,13 +46,13 @@ func main() {
 
 	// 写死的 map
 	serviceMap := map[string]service.Servicer{
-		"RSS Searcher": weiboService,
-		"hitokoto provider": hitoService,
+		"RSS Searcher":                   weiboService,
+		"hitokoto provider":              hitoService,
 		"trace.moe image search service": imageSearch,
 	}
 
 	revMap := make(map[service.Servicer]string)
-	for k,v := range serviceMap {
+	for k, v := range serviceMap {
 		revMap[v] = k
 	}
 
@@ -91,7 +91,6 @@ func main() {
 		manager.RecvRequest(&chatData)
 	})
 
-
 	// 本来应该这样处理，但是时间有点不够了，先写后面的
 	//// 处理 manager 的 groups
 	//r.POST("/manager/service/:serviceName/group/:groupId", func(context *gin.Context) {
@@ -102,13 +101,13 @@ func main() {
 	//
 	//r.DELETE("/manager/service/:serviceName/group/:groupId", func(context *gin.Context) {
 	//})
-	
+
 	r.POST("/manager/group/:groupId", func(context *gin.Context) {
 		groudId := context.Param("groupId")
 		manager.AddManagedGroups(groudId)
 		context.Writer.WriteHeader(http.StatusNoContent)
 	})
-	
+
 	r.GET("/manager/group", func(context *gin.Context) {
 		groups := manager.ListManagedGroups()
 
@@ -116,13 +115,12 @@ func main() {
 			"groups": groups,
 		})
 	})
-	
+
 	r.DELETE("/manager/group/:groupId", func(context *gin.Context) {
 		groudId := context.Param("groupId")
 		manager.DeleteManagedGroups(groudId)
 		context.Writer.WriteHeader(http.StatusNoContent)
 	})
-	
 
 	// 添加、删除服务
 	r.POST("/manager/service/:serviceName", func(context *gin.Context) {
@@ -143,10 +141,10 @@ func main() {
 		manager.AddService(servicer, curAdd.AddName)
 		context.JSON(200, map[string]string{
 			"serviceName": serviceName,
-			"addName": curAdd.AddName,
+			"addName":     curAdd.AddName,
 		})
 	})
-	
+
 	r.DELETE("/manager/service/:addName", func(context *gin.Context) {
 		serviceName := context.Param("addName")
 		exists := manager.RemoveService(serviceName)
@@ -171,7 +169,6 @@ func main() {
 			"groups": retMap,
 		})
 	})
-
 
 	r.Run(fmt.Sprintf(":%d", HttpRecvPort))
 }

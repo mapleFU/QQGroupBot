@@ -1,13 +1,13 @@
 package image
 
 import (
-	"testing"
-	"io/ioutil"
-	"fmt"
-	"github.com/BurntSushi/toml"
 	"bufio"
 	"bytes"
+	"fmt"
+	"github.com/BurntSushi/toml"
+	"io/ioutil"
 	"strings"
+	"testing"
 )
 
 func TestGetImage(t *testing.T) {

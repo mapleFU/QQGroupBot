@@ -1,13 +1,13 @@
 package query
 
 import (
-	"github.com/mapleFU/QQBot/qqbot/data/group"
-	"strings"
-	"net/http"
-	"fmt"
 	"encoding/json"
+	"fmt"
+	"github.com/mapleFU/QQBot/qqbot/data/group"
 	hitokoto2 "github.com/mapleFU/QQBot/qqbot/data/hitokoto"
 	"github.com/mapleFU/QQBot/qqbot/service"
+	"net/http"
+	"strings"
 )
 
 type HitokotoService struct {
@@ -23,7 +23,7 @@ func NewHitoService() *HitokotoService {
 func (hqs *HitokotoService) IfAcceptMessage(Request *group.ChatRequestData) bool {
 	for _, data := range Request.Message {
 		if data.Type == "text" {
-			if strings.Contains(data.Data.Text, "二次元名言")  {
+			if strings.Contains(data.Data.Text, "二次元名言") {
 				return true
 			}
 		}
@@ -48,9 +48,9 @@ func (hqs *HitokotoService) Run() {
 			}
 
 			*hqs.OutChan <- group.StringRespMessage{
-				Message: hitokoto.String(),
-				GroupID:"",
-				AutoEscape:true,
+				Message:    hitokoto.String(),
+				GroupID:    "",
+				AutoEscape: true,
 			}
 		}()
 	}
