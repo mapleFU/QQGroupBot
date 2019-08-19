@@ -2,15 +2,14 @@ package subscribe
 
 import (
 	"github.com/mapleFU/QQBot/qqbot/data/group"
+	"github.com/mapleFU/QQBot/qqbot/logger"
 	"github.com/mapleFU/QQBot/qqbot/service"
-
-	"bytes"
-	"fmt"
-	"log"
-	"strings"
 	"time"
 
+	"bytes"
 	"golang.org/x/net/html"
+	"log"
+	"strings"
 
 	"github.com/grokify/html-strip-tags-go"
 	"github.com/mmcdole/gofeed"
@@ -55,7 +54,6 @@ func NewWeiboService(weiboUrl string) *WeiboService {
 
 func buildService(item *gofeed.Item, title string) group.StringRespMessage {
 	// handle description
-
 	Resp := group.StringRespMessage{
 		Message:    title + " : \n" + strip.StripTags(item.Description) + "\n链接：" + item.Link,
 		GroupID:    "",
@@ -65,41 +63,45 @@ func buildService(item *gofeed.Item, title string) group.StringRespMessage {
 }
 
 // TODO: make clear how it end.
+// TODO: consider using redis or other persistence techniques
 func (self *WeiboService) Run() {
 	fp := gofeed.NewParser()
-	feed, err := fp.ParseURL(self.ServiceUrl)
-	if err != nil {
-		panic(err.Error())
+	var lastNewest *gofeed.Item
+	var title string
 
-	}
-	lastNewest := feed.Items[0]
-	title := feed.Title
-
-	//*self.OutChan <- buildService(lastNewest, title)
 	// 考虑任务如何中止
-	for range self.InChan {
+	for {
 		// 10 分钟一次
-		time.Sleep(time.Minute * 10)
 		feed, _ := fp.ParseURL(self.ServiceUrl)
 		if feed.Items == nil {
-			fmt.Println("Feed.Items is nil!")
+			logger.SLogger.Info("Feed.Items is nil!")
 		}
-		var curNewest *gofeed.Item
-		curNewest = nil
+		if lastNewest == nil {
+			lastNewest = feed.Items[0]
+			logger.SLogger.Info("LastNewest Inited!")
+			title = "[测试消息]" + lastNewest.Title
+			Resp := buildService(lastNewest, title)
+			logger.SLogger.Info("ready to send resp ", "resp", Resp)
+			*self.OutChan <- Resp
+		}
+
 		for _, item := range feed.Items {
 			if item == nil {
-				fmt.Println("item is nil here")
+				logger.SLogger.Info("item is nil here")
 			}
-			if curNewest == nil {
-				curNewest = item
-			}
+
 			if item.Title == lastNewest.Title {
-				lastNewest = curNewest
+				logger.SLogger.Info("item.Title == lastNewest.Title")
 				break
 			} else {
+
+				title = item.Title
 				Resp := buildService(item, title)
+				logger.SLogger.Info("ready to send resp ", "resp", Resp)
 				*self.OutChan <- Resp
 			}
 		}
+		// TODO: debug set it 1
+		time.Sleep(time.Minute * 5)
 	}
 }

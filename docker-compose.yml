@@ -6,21 +6,21 @@ services:
     ports:
       - "9005:9000"
       - "5700:5700"
-      - "5911:5911"
     environment:
-      - COOLQ_ACCOUNT=3187545268
-      - CQHTTP_POST_URL=http://httpserver:8085
+#      - COOLQ_ACCOUNT=3187545268
+#      - CQHTTP_POST_URL=http://httpserver:8085
       - CQHTTP_SERVE_DATA_FILES=yes
-      - CQHTTP_USE_WS=yes
       - CQHTTP_USE_HTTP=yes
       - CQHTTP_POST_MESSAGE_FORMAT=array
-    volumes:
-      # you should set your config in this dir
-      # if you continues run this, something bad may happens
-      - ~/coolq:/home/user/coolq
-      - ./config:/home/user/coolq/app/io.github.richardchien.coolqhttpapi/config
+      - port=5700
+#    volumes:
+#      # you should set your config in this dir
+#      # if you continues run this, something bad may happens
+#      - ./coolq:/home/user/coolq
+#      - ./config:/home/user/coolq/app/io.github.richardchien.coolqhttpapi/config
 #      debug with host mode
 #    network_mode: "host"
+#     # RSSHUB 旧的配置
 #    extra_hosts:
 #      - "httpserver:101.132.121.41"
   httpserver:

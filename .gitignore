@@ -26,3 +26,5 @@ config/*
 log/*
 coolq/*
 qqbot/vendor/*
+
+**/qqbot

@@ -40,7 +40,9 @@ func main() {
 
 	manager := service.NewManager("http://cqhttp:5700")
 
-	weiboService := subscribe.NewWeiboService("http://rsshub/weibo/user/5628238455")
+	weiboService := subscribe.NewWeiboService("http://rsshub:1200/weibo/user/5628238455")
+	weiboService2 := subscribe.NewWeiboService("http://rsshub:1200/weibo/user/1195908387")
+
 	imageSearch := query.NewSauceNaoQuery()
 	hitoService := query.NewHitoService()
 
@@ -49,6 +51,7 @@ func main() {
 		"RSS Searcher":                   weiboService,
 		"hitokoto provider":              hitoService,
 		"trace.moe image search service": imageSearch,
+		"weibo2": weiboService2,
 	}
 
 	revMap := make(map[service.Servicer]string)
@@ -56,14 +59,14 @@ func main() {
 		revMap[v] = k
 	}
 
-	//
 	manager.AddService(weiboService, "weibo")
 	manager.AddService(imageSearch, "image-search")
 	manager.AddService(hitoService, "hitokoto")
+	manager.AddService(weiboService2, "weibo2")
 
+	// TODO: set this config by
 	manager.AddManagedGroups("117440534")
 	//manager.AddManagedGroups("702208467")
-	//manager.AddManagedGroups("878156039")
 
 	r := gin.Default()
 	r.Use(cors.Default())

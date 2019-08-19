@@ -91,6 +91,20 @@ func (manager *Manager) RecvRequest(request *group.ChatRequestData) {
 }
 
 func NewManager(Addr string) *Manager {
+	// TODO: know how to checking here.
+	//for {
+	//
+	//	resp, err := http.Post(Addr + "/send_private_msg?1506118561&message='我活了'", "", nil)
+	//	if err != nil && resp != nil {
+	//		logger.SLogger.Info("Getting ok in creating service manager with `cqhttp`", "response", resp)
+	//		break
+	//	} else {
+	//
+	//		logger.SLogger.Info("Getting failed in creating service manager with `cqhttp`, sleep for 10 secs")
+	//		time.Sleep(time.Second * 10)
+	//	}
+	//}
+
 	this := &Manager{
 		serviceMap:    make(map[string]Servicer),
 		requester:     *Requester.NewRequester(Addr),
