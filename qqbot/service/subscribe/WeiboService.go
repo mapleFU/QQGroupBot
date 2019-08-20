@@ -92,6 +92,8 @@ func (self *WeiboService) Run() {
 
 			if item.Title == lastNewest.Title {
 				logger.SLogger.Info("item.Title == lastNewest.Title")
+				// set latest news to the newer latest field
+				lastNewest = feed.Items[0]
 				break
 			} else {
 
