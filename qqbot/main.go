@@ -66,7 +66,7 @@ func main() {
 
 	// TODO: set this config by
 	manager.AddManagedGroups("117440534")
-	//manager.AddManagedGroups("702208467")
+	manager.AddManagedGroups("247437988")
 
 	r := gin.Default()
 	r.Use(cors.Default())

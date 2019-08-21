@@ -54,8 +54,9 @@ func NewWeiboService(weiboUrl string) *WeiboService {
 
 func buildService(item *gofeed.Item, title string) group.StringRespMessage {
 	// handle description
+	logger.SLogger.Info("Send with title", "title", title)
 	Resp := group.StringRespMessage{
-		Message:    title + " : \n" + strip.StripTags(item.Description) + "\n链接：" + item.Link,
+		Message:    strip.StripTags(item.Description) + "\n链接：" + item.Link,
 		GroupID:    "",
 		AutoEscape: true,
 	}
@@ -79,10 +80,11 @@ func (self *WeiboService) Run() {
 		if lastNewest == nil {
 			lastNewest = feed.Items[0]
 			logger.SLogger.Info("LastNewest Inited!")
-			title = "[测试消息]" + lastNewest.Title
-			Resp := buildService(lastNewest, title)
-			logger.SLogger.Info("ready to send resp ", "resp", Resp)
-			*self.OutChan <- Resp
+
+			//title = "[测试消息]" + lastNewest.Title
+			//Resp := buildService(lastNewest, title)
+			//logger.SLogger.Info("ready to send resp ", "resp", Resp)
+			//*self.OutChan <- Resp
 		}
 
 		for _, item := range feed.Items {
