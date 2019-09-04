@@ -38,14 +38,6 @@ services:
       - cqhttp
       - rsshub
 
-  front-page:
-    build:
-      ./qqbot-frontend
-    depends_on:
-      - httpserver
-    ports:
-      - "8083:80"
-
   rsshub:
     image: diygod/rsshub:latest
 
