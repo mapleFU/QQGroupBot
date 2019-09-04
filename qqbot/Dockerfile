@@ -9,6 +9,6 @@ EXPOSE 8085
 
 COPY ./ $SRC_DIR
 
-RUN go build -mod=vendor $SRC_DIR/main.go
+RUN go build -v -mod=vendor $SRC_DIR/main.go
 
 CMD ["./main"]

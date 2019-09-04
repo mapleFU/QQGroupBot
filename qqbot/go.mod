@@ -4,7 +4,7 @@ go 1.12
 
 require (
 	github.com/BurntSushi/toml v0.3.1
-	github.com/PuerkitoBio/goquery v1.5.0 // indirect
+	github.com/PuerkitoBio/goquery v1.5.0
 	github.com/gin-contrib/cors v1.3.0
 	github.com/gin-gonic/gin v1.4.0
 	github.com/grokify/html-strip-tags-go v0.0.0-20190424092004-025bd760b278
