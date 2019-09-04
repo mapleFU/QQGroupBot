@@ -39,10 +39,10 @@ func checkAtData(chatData *group.ChatRequestData, robotQQ string) bool {
 
 func main() {
 
-	manager := service.NewManager("http://localhost:5700")
+	manager := service.NewManager("http://cqhttp:5700")
 
-	weiboService := subscribe.NewWeiboService(RssHubTestingAddress + "/weibo/user/5628238455")
-	weiboService2 := subscribe.NewWeiboService(RssHubTestingAddress + "/weibo/user/1195908387")
+	weiboService := subscribe.NewWeiboService(RssHubAddress + "/weibo/user/5628238455")
+	weiboService2 := subscribe.NewWeiboService(RssHubAddress + "/weibo/user/1195908387")
 
 	//weiboService := subscribe.NewWeiboService(RssHubAddress + "/weibo/user/5628238455")
 	//weiboService2 := subscribe.NewWeiboService(RssHubAddress + "/weibo/user/1195908387")
