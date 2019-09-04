@@ -24,6 +24,8 @@ services:
 #    extra_hosts:
 #      - "httpserver:101.132.121.41"
   httpserver:
+    environment:
+      - COOLQ_URL=https://dlsec.cqp.me/cqp-xiaoi
     volumes:
       - ~/coolq:/home/user/coolq
       - ./log:/home/user/log

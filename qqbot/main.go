@@ -19,6 +19,11 @@ const HttpManagerPort = 6324
 
 const robotQQ = "3187545268"
 
+const RssHubAddress = "http://rsshub:1200"
+
+// testing
+const RssHubTestingAddress = "http://localhost:1200"
+
 func checkAtData(chatData *group.ChatRequestData, robotQQ string) bool {
 	ok := false
 	for _, detailMessage := range chatData.Message {
@@ -32,16 +37,15 @@ func checkAtData(chatData *group.ChatRequestData, robotQQ string) bool {
 	return ok
 }
 
-func runCQHttpServer(manager *service.Manager) {
-
-}
-
 func main() {
 
-	manager := service.NewManager("http://cqhttp:5700")
+	manager := service.NewManager("http://localhost:5700")
 
-	weiboService := subscribe.NewWeiboService("http://rsshub:1200/weibo/user/5628238455")
-	weiboService2 := subscribe.NewWeiboService("http://rsshub:1200/weibo/user/1195908387")
+	weiboService := subscribe.NewWeiboService(RssHubTestingAddress + "/weibo/user/5628238455")
+	weiboService2 := subscribe.NewWeiboService(RssHubTestingAddress + "/weibo/user/1195908387")
+
+	//weiboService := subscribe.NewWeiboService(RssHubAddress + "/weibo/user/5628238455")
+	//weiboService2 := subscribe.NewWeiboService(RssHubAddress + "/weibo/user/1195908387")
 
 	imageSearch := query.NewSauceNaoQuery()
 	hitoService := query.NewHitoService()
@@ -51,7 +55,7 @@ func main() {
 		"RSS Searcher":                   weiboService,
 		"hitokoto provider":              hitoService,
 		"trace.moe image search service": imageSearch,
-		"weibo2": weiboService2,
+		"weibo2":                         weiboService2,
 	}
 
 	revMap := make(map[service.Servicer]string)
@@ -66,7 +70,8 @@ func main() {
 
 	// TODO: set this config by
 	manager.AddManagedGroups("117440534")
-	manager.AddManagedGroups("247437988")
+	//manager.AddManagedGroups("247437988")
+	//manager.AddManagedGroups("702208467")
 
 	r := gin.Default()
 	r.Use(cors.Default())
