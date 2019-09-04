@@ -1,6 +1,7 @@
 package subscribe
 
 import (
+	"fmt"
 	"sort"
 	"strings"
 	"time"
@@ -63,6 +64,10 @@ func ExtractImages(rawDoc string) ([]string, error) {
 	return links, nil
 }
 
+func CqLink(s string) string {
+	return fmt.Sprintf("[CQ:image,file=%s]", s)
+}
+
 func NewWeiboService(weiboUrl string) *WeiboService {
 	return &WeiboService{
 		ServiceUrl: weiboUrl,
@@ -70,13 +75,21 @@ func NewWeiboService(weiboUrl string) *WeiboService {
 	}
 }
 
-func buildService(item *gofeed.Item, title string) group.StringRespMessage {
+func buildService(item *gofeed.Item) group.StringRespMessage {
 	// handle description
-	logger.SLogger.Info("Send with title", "title", title)
+	arr, err := ExtractImages(item.Description)
+	if err != nil {
+		logger.SLogger.Error(err)
+	}
+	links := make([]string, len(arr))
+	for i, v := range arr {
+		links[i] = CqLink(v)
+	}
+
+	logger.SLogger.Info("Send with title", "title", item.Title)
 	Resp := group.StringRespMessage{
-		Message:    strip.StripTags(item.Description) + "\n链接：" + item.Link,
+		Message:    strip.StripTags(item.Description) + "\n链接：" + item.Link + "\n" + strings.Join(links, " "),
 		GroupID:    "",
-		AutoEscape: true,
 	}
 	return Resp
 }
@@ -112,7 +125,11 @@ func (self *WeiboService) Run() {
 			// 指向 feed.Items[0]
 			if lastNewest == nil {
 				lastNewest = feed.Items[0]
+
 				logger.SLogger.Info("LastNewest Inited!")
+				Resp := buildService(lastNewest)
+				logger.SLogger.Info("ready to send resp ", "resp", Resp)
+				*self.OutChan <- Resp
 				return
 			}
 
@@ -130,7 +147,7 @@ func (self *WeiboService) Run() {
 					break
 				} else {
 					title = item.Title
-					Resp := buildService(item, title)
+					Resp := buildService(item)
 					logger.SLogger.Info("ready to send resp ", "resp", Resp)
 					*self.OutChan <- Resp
 				}

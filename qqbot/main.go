@@ -39,7 +39,7 @@ func checkAtData(chatData *group.ChatRequestData, robotQQ string) bool {
 
 func main() {
 
-	manager := service.NewManager("http://cqhttp:5700")
+	manager := service.NewManager("http://localhost:5700")
 
 	weiboService := subscribe.NewWeiboService(RssHubTestingAddress + "/weibo/user/5628238455")
 	weiboService2 := subscribe.NewWeiboService(RssHubTestingAddress + "/weibo/user/1195908387")
@@ -69,9 +69,9 @@ func main() {
 	manager.AddService(weiboService2, "weibo2")
 
 	// TODO: set this config by
-	//manager.AddManagedGroups("117440534")
+	manager.AddManagedGroups("117440534")
 	//manager.AddManagedGroups("247437988")
-	manager.AddManagedGroups("702208467")
+	//manager.AddManagedGroups("702208467")
 
 	r := gin.Default()
 	r.Use(cors.Default())
