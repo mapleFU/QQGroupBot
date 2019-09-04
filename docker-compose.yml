@@ -7,6 +7,7 @@ services:
       - "9005:9000"
       - "5700:5700"
     environment:
+      - COOLQ_URL=https://dlsec.cqp.me/cqp-xiaoi
 #      - COOLQ_ACCOUNT=3187545268
 #      - CQHTTP_POST_URL=http://httpserver:8085
       - CQHTTP_SERVE_DATA_FILES=yes
@@ -24,8 +25,6 @@ services:
 #    extra_hosts:
 #      - "httpserver:101.132.121.41"
   httpserver:
-    environment:
-      - COOLQ_URL=https://dlsec.cqp.me/cqp-xiaoi
     volumes:
       - ~/coolq:/home/user/coolq
       - ./log:/home/user/log
