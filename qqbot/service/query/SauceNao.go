@@ -1,10 +1,10 @@
 package query
 
 import (
-	"github.com/mapleFU/QQBot/qqbot/data/group"
-	"github.com/mapleFU/QQBot/qqbot/data/tracemoe/search"
-	"github.com/mapleFU/QQBot/qqbot/image"
-	"github.com/mapleFU/QQBot/qqbot/service"
+	"github.com/mapleFU/QQGroupBot/qqbot/data/group"
+	"github.com/mapleFU/QQGroupBot/qqbot/data/tracemoe/search"
+	"github.com/mapleFU/QQGroupBot/qqbot/image"
+	"github.com/mapleFU/QQGroupBot/qqbot/service"
 
 	"fmt"
 	"io/ioutil"

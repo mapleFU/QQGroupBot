@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/mapleFU/QQBot/qqbot/Requester"
-	"github.com/mapleFU/QQBot/qqbot/data/group"
+	"github.com/mapleFU/QQGroupBot/qqbot/data/group"
+	"github.com/mapleFU/QQGroupBot/qqbot/requester"
 )
 
 type Manager struct {
 	serviceMap  map[string]Servicer
-	requester   Requester.Requester
+	requester   requester.Requester
 	receiver    chan group.ChatResponseData
 	strReceiver chan group.StringRespMessage
 	// 管理的群组
@@ -107,7 +107,7 @@ func NewManager(Addr string) *Manager {
 
 	this := &Manager{
 		serviceMap:    make(map[string]Servicer),
-		requester:     *Requester.NewRequester(Addr),
+		requester:     *requester.NewRequester(Addr),
 		receiver:      make(chan group.ChatResponseData, 5),
 		strReceiver:   make(chan group.StringRespMessage, 5),
 		managedGroups: make([]string, 0),

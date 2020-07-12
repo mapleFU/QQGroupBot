@@ -6,9 +6,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mapleFU/QQBot/qqbot/data/group"
-	"github.com/mapleFU/QQBot/qqbot/logger"
-	"github.com/mapleFU/QQBot/qqbot/service"
+	"github.com/mapleFU/QQGroupBot/qqbot/data/group"
+	"github.com/mapleFU/QQGroupBot/qqbot/logger"
+	"github.com/mapleFU/QQGroupBot/qqbot/service"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/grokify/html-strip-tags-go"
@@ -88,8 +88,8 @@ func buildService(item *gofeed.Item) group.StringRespMessage {
 
 	logger.SLogger.Info("Send with title", "title", item.Title)
 	Resp := group.StringRespMessage{
-		Message:    strip.StripTags(item.Description) + "\n链接：" + item.Link + "\n" + strings.Join(links, " "),
-		GroupID:    "",
+		Message: strip.StripTags(item.Description) + "\n链接：" + item.Link + "\n" + strings.Join(links, " "),
+		GroupID: "",
 	}
 	return Resp
 }

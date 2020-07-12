@@ -1,7 +1,7 @@
 package query
 
 import (
-	"github.com/mapleFU/QQBot/qqbot/service"
+	"github.com/mapleFU/QQGroupBot/qqbot/service"
 )
 
 type QueryService struct {

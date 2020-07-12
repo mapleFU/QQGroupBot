@@ -3,9 +3,9 @@ package query
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/mapleFU/QQBot/qqbot/data/group"
-	hitokoto2 "github.com/mapleFU/QQBot/qqbot/data/hitokoto"
-	"github.com/mapleFU/QQBot/qqbot/service"
+	"github.com/mapleFU/QQGroupBot/qqbot/data/group"
+	hitokoto2 "github.com/mapleFU/QQGroupBot/qqbot/data/hitokoto"
+	"github.com/mapleFU/QQGroupBot/qqbot/service"
 	"net/http"
 	"strings"
 )

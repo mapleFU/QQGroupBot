@@ -4,9 +4,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/mapleFU/QQBot/qqbot/data/group"
-	"github.com/mapleFU/QQBot/qqbot/data/group/message"
-	"github.com/mapleFU/QQBot/qqbot/service"
+	"github.com/mapleFU/QQGroupBot/qqbot/data/group"
+	"github.com/mapleFU/QQGroupBot/qqbot/data/group/message"
+	"github.com/mapleFU/QQGroupBot/qqbot/service"
 )
 
 type RollService struct {

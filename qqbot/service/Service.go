@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/mapleFU/QQBot/qqbot/data/group"
+	"github.com/mapleFU/QQGroupBot/qqbot/data/group"
 )
 
 type Servicer interface {

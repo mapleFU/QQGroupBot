@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
-	"github.com/mapleFU/QQBot/qqbot/data/group/message"
+	"github.com/mapleFU/QQGroupBot/qqbot/data/group/message"
 	"io/ioutil"
 	"strings"
 )

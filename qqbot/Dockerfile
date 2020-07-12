@@ -1,6 +1,6 @@
 FROM golang:1.12-alpine
 
-ENV SRC_DIR=/go/src/github.com/mapleFU/QQBot/qqbot
+ENV SRC_DIR=/go/src/github.com/mapleFU/QQGroupBot/qqbot
 ENV GO111MODULE on
 
 WORKDIR $SRC_DIR

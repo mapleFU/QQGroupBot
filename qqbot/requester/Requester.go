@@ -1,9 +1,9 @@
-package Requester
+package requester
 
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/mapleFU/QQBot/qqbot/data/group"
+	"github.com/mapleFU/QQGroupBot/qqbot/data/group"
 	"net/http"
 )
 

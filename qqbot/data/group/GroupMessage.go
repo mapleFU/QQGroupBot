@@ -1,6 +1,6 @@
 package group
 
-import "github.com/mapleFU/QQBot/qqbot/data/group/message"
+import "github.com/mapleFU/QQGroupBot/qqbot/data/group/message"
 
 type ArrayRespMessage struct {
 	GroupID    string          `json:"group_id"`

@@ -1,8 +1,8 @@
 package subscribe
 
 import (
-	"github.com/mapleFU/QQBot/qqbot/data/group"
-	"github.com/mapleFU/QQBot/qqbot/service"
+	"github.com/mapleFU/QQGroupBot/qqbot/data/group"
+	"github.com/mapleFU/QQGroupBot/qqbot/service"
 )
 
 type Subscribe struct {

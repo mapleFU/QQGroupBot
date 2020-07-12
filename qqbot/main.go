@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/mapleFU/QQBot/qqbot/data/group"
-	"github.com/mapleFU/QQBot/qqbot/service"
-	"github.com/mapleFU/QQBot/qqbot/service/query"
-	"github.com/mapleFU/QQBot/qqbot/service/subscribe"
+	"github.com/mapleFU/QQGroupBot/qqbot/data/group"
+	"github.com/mapleFU/QQGroupBot/qqbot/service"
+	"github.com/mapleFU/QQGroupBot/qqbot/service/query"
+	"github.com/mapleFU/QQGroupBot/qqbot/service/subscribe"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"

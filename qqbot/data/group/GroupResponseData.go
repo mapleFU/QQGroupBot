@@ -1,6 +1,6 @@
 package group
 
-import "github.com/mapleFU/QQBot/qqbot/data/group/message"
+import "github.com/mapleFU/QQGroupBot/qqbot/data/group/message"
 
 type ChatResponseData struct {
 	Reply      message.Message `json:"reply"`
